@@ -1,2 +1,4 @@
-package br.com.desafio.picpaysimplificado.compartilhado;public @interface CPFouCNPJ {
+package br.com.desafio.picpaysimplificado.compartilhado;
+
+public @interface CPFouCNPJ {
 }

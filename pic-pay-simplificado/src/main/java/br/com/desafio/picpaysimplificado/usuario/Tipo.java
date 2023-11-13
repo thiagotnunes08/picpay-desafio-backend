@@ -1,2 +1,7 @@
-package br.com.desafio.picpaysimplificado.usuario;public enum Tipo {
+package br.com.desafio.picpaysimplificado.usuario;
+
+public enum Tipo {
+
+    COMUM,LOJISTA
+
 }
