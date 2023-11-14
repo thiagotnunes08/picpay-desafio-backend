@@ -22,6 +22,8 @@ target/
 /mvnw
 /mvnw.cmd
 
+../.idea
+
 
 ### NetBeans ###
 /nbproject/private/

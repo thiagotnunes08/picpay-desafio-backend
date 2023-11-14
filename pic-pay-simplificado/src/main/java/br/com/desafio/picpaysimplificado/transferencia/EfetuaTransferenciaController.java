@@ -31,7 +31,7 @@ public class EfetuaTransferenciaController {
 
     @PostMapping("api/v1/transacao")
     @Transactional
-    public ResponseEntity<?> transfere(@RequestBody @Valid NovaTransferenciaRequest request) {
+    public ResponseEntity<?> efetua(@RequestBody @Valid NovaTransferenciaRequest request) {
 
         var pagador = usuarioRepository
                 .findById(request.pagadorId())
