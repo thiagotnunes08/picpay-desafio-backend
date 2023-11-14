@@ -57,4 +57,12 @@ public class Usuario {
     public void acrescenta(BigDecimal valor) {
         carteira.acrescenta(valor);
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

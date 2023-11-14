@@ -2,9 +2,6 @@ package br.com.desafio.picpaysimplificado.transferencia;
 
 import br.com.desafio.picpaysimplificado.usuario.Usuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -28,5 +25,9 @@ public class Transferencia {
         this.pagador = pagador;
         this.beneficiario = beneficiario;
         this.efetuadaEm = LocalDateTime.now();
+    }
+
+    public BigDecimal getValor() {
+        return valor;
     }
 }
