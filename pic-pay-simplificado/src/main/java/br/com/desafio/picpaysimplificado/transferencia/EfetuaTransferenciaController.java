@@ -1,5 +1,7 @@
 package br.com.desafio.picpaysimplificado.transferencia;
 
+import br.com.desafio.picpaysimplificado.client.autorizador.AutorizadorClient;
+import br.com.desafio.picpaysimplificado.client.autorizador.AutorizadorService;
 import br.com.desafio.picpaysimplificado.usuario.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -15,10 +17,12 @@ public class EfetuaTransferenciaController {
 
     private final UsuarioRepository usuarioRepository;
     private final TransferenciaRepository transferenciaRepository;
+    private final AutorizadorService autorizadorService;
 
-    public EfetuaTransferenciaController(UsuarioRepository usuarioRepository, TransferenciaRepository transferenciaRepository) {
+    public EfetuaTransferenciaController(UsuarioRepository usuarioRepository, TransferenciaRepository transferenciaRepository, AutorizadorService autorizadorService, AutorizadorClient autorizadorClient) {
         this.usuarioRepository = usuarioRepository;
         this.transferenciaRepository = transferenciaRepository;
+        this.autorizadorService = autorizadorService;
     }
 
     @PostMapping("api/v1/transacao")
@@ -34,6 +38,11 @@ public class EfetuaTransferenciaController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         var novaTransferencia = request.toModel(pagador, beneficiario);
+
+        if (autorizadorService.eNaoAutorizada()) {
+
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
         transferenciaRepository.save(novaTransferencia);
 
