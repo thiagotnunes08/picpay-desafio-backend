@@ -34,17 +34,16 @@ public class EfetuaTransferenciaController {
     public ResponseEntity<?> efetua(@RequestBody @Valid NovaTransferenciaRequest request) {
 
         var pagador = usuarioRepository
-                .findById(request.pagadorId())
+                .buscaUsuarioComLockPessimista(request.pagadorId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         var beneficiario = usuarioRepository
-                .findById(request.beneficiarioId())
+                .buscaUsuarioComLockPessimista(request.beneficiarioId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         var novaTransferencia = request.toModel(pagador, beneficiario);
 
         if (autorizadorService.eNaoAutorizada()) {
-
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
